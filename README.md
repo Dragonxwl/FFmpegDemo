@@ -10,3 +10,6 @@ Version 1.0 {
 FFmpeg 5.1 编译arm64-v8a so文件集成Demo
 }
 
+对应说明文章地址：
+[window10环境 android studio集成ffmpeg5.1 NDK r24](https://www.jianshu.com/p/da6049a1140a)
+[window 10 下安装 Ubuntu 22.04 使用 NDK r24 编译FFmpeg 5.1](https://www.jianshu.com/p/487f0e6d0e30)
