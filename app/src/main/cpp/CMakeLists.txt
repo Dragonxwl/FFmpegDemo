@@ -79,7 +79,7 @@ set_target_properties( swscale
         ${distribution_DIR}/${ANDROID_ABI}/libswscale.so)
 
 # 引入头文件
-include_directories(../../../libs/include)
+include_directories(../../../libs/include/${ANDROID_ABI})
 
 # 告诉编译器生成native-lib库需要链接的库
 # native-lib库需要依赖avcodec、avfilter等库
