@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <Button
@@ -45,6 +46,45 @@
             android:textAllCaps="false" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_set_callback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="set_callback"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_create_path"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="create_path"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_get_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="get_file"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_push"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="push"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -55,5 +95,6 @@
             android:layout_height="wrap_content"
             android:text="Hello World!" />
     </ScrollView>
+
 
 </LinearLayout>
