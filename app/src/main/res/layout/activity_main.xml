@@ -60,14 +60,6 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/btn_create_path"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:text="create_path"
-            android:textAllCaps="false" />
-
-        <Button
             android:id="@+id/btn_get_file"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,6 +76,8 @@
             android:textAllCaps="false" />
 
     </LinearLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"

@@ -1,10 +1,11 @@
 package com.xwl.ffmpegdemo
 
+import android.Manifest
+import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
+import pub.devrel.easypermissions.EasyPermissions
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val perms = arrayOf(
+            Manifest.permission.READ_CALENDAR,
+            Manifest.permission.WRITE_CALENDAR,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        if (!EasyPermissions.hasPermissions(this, *perms)) {
+            EasyPermissions.requestPermissions(this, "写权限", 10086, *perms)
+        }
         btn_protocol.setOnClickListener {
             tv_info!!.text = urlprotocolinfo()
         }
@@ -30,9 +39,6 @@ class MainActivity : AppCompatActivity() {
             tv_info!!.text = avformatinfo()
         }
 
-        btn_create_path.setOnClickListener {
-            Environment.getDataDirectory().parentFile
-        }
         btn_set_callback.setOnClickListener {
             setCallback(object : PushCallback {
                 override fun videoCallback(pts: Long, dts: Long, duration: Long, index: Long) {
@@ -47,22 +53,50 @@ class MainActivity : AppCompatActivity() {
             })
         }
         btn_get_file.setOnClickListener {
-            path =
-                Environment.getExternalStorageDirectory().absolutePath + File.separator.toString() + "cs.mp4"
-            val file = File(path)
-            tv_info!!.text = "path ${file.exists()}"
+            chooseFile()
         }
         btn_push.setOnClickListener {
             object : Thread() {
                 override fun run() {
                     super.run()
-                    tv_info!!.text = "result ${pushRtspFile(path)}"
+                    tv_info!!.text = "result ${pushRtspFile(savePath)}"
                 }
             }.start()
         }
     }
 
-    var path:String = ""
+    private val CHOOSE_FILE = 10
+    /**
+     * 选择文件
+     */
+    private fun chooseFile() {
+        val intent = Intent()
+        intent.type = "video/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.addCategory(Intent.CATEGORY_OPENABLE)
+        startActivityForResult(intent, CHOOSE_FILE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            CHOOSE_FILE -> if (resultCode == RESULT_OK) {
+                savePath = UriUtils.getPath(this@MainActivity, data?.data)
+                tv_info!!.text = savePath
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this)
+    }
+
+    var savePath = ""
 
     external fun stringFromJNI(): String?
     private external fun urlprotocolinfo(): String?

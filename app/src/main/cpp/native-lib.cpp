@@ -4,7 +4,6 @@
 #include <exception>
 #include <iostream>
 #include <sstream>
-#include <libavcodec/avcodec.h>
 
 //定义日志宏变量
 #define logw(content)   __android_log_write(ANDROID_LOG_WARN,"eric",content)
@@ -20,6 +19,7 @@ extern "C"
 #include <libavformat/avformat.h>
 #include <libavfilter/avfilter.h>
 #include <libavutil/time.h>
+#include <libavcodec/avcodec.h>
 
 
 using namespace std;
